@@ -1,1 +1,84 @@
+:root {
+    --color-black: #000;
+    --color-white: #FFF;
+    --heading-secondary-size: 3rem;
+    --btn-bottom-space: 3rem;
+    --btn-padding-left: 2.5rem;
+}
 
+body {
+    font-size: 1.6rem;
+    font-family: sans-serif;
+    height: 100vh;
+    padding: 2rem 4rem;
+}
+
+h1,
+h2,
+h3 { text-transform: uppercase; }
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: var(--heading-secondary-size);
+    text-align: center;
+}
+
+.main-container {
+    display: flex;
+    height: 72.5%;
+    justify-content: space-between;
+}
+
+.main-child {
+    display: grid;
+    /* Shorthand for grid-template-rows / grid-template-columns */
+    grid-template: calc(var(--heading-secondary-size) + .5rem) 1fr / 1fr;
+    padding: 1.5rem 2.5rem 2.5rem;
+    row-gap: calc(var(--btn-bottom-space) - 1rem);
+    /* Support for older browsers not recognizing `row-gap`. */
+    grid-row-gap: calc(var(--btn-bottom-space) - 1rem);
+}
+
+.main-child > * { grid-column: 1 / 2; }
+
+.main-child > h2 { grid-row: 1 / 2; }
+.main-child > div { grid-row: 2 / 3; }
+
+.buttons-container {
+    display: grid;
+    /* Use [name] to reference respective row line numbers. */
+    grid-template:
+        [button1-start] 1fr
+        [button2-start] 1fr
+        [button3-start] 1fr
+        [buttons-end] / 1fr;
+    row-gap: var(--btn-bottom-space);
+    grid-row-gap: var(--btn-bottom-space);
+}
+
+.action-button {
+    font-size: 2rem;
+    grid-column: 1 / 2;
+    text-align: left;
+}
+
+.action-button--1 {
+    /* Button begins at line [button1-start] and spans 1 row. */
+    grid-row: button1-start / span 1;
+    padding-left: var(--btn-padding-left);
+}
+
+.action-button--2 {
+    grid-row: button2-start / span 1;
+    padding-left: var(--btn-padding-left);
+}
+
+.action-button--3 {
+    grid-row: button3-start / span 1;
+    padding-left: calc(var(--btn-padding-left) - .25rem);
+}
