@@ -1,0 +1,81 @@
+/* RESET STYLES, from normalize.css, Eric Meyer's reset.css, and my own
+personal preferences. */
+
+/**
+ * 1. Remove default styles applied by all browser user agents.
+ * 2. Force all elements to inherit specific properties.
+ */
+
+*,
+*::before,
+*::after {
+    margin: 0; /* 1 */
+    padding: 0; /* 1 */
+    border: 0; /* 1 */
+    font-size: 100%; /* 1 */
+    font-family: inherit; /* 2 */
+    box-sizing: inherit; /* 2 */
+}
+
+/**
+ * 1. Add border-box sizing in all browsers.
+ * 2. Explicitly define 1rem as percentage of user's default font-size.
+ * 3. Correct line-height in all browsers.
+ * 4. Prevent adjustments of font-size in different browsers.
+ */
+
+html {
+    box-sizing: border-box; /* 1 */
+    font-size: 62.5%; /* 2 */
+    line-height: 1.15; /* 3 */
+    -webkit-text-size-adjust: 100%; /* 4 */
+    -moz-text-size-adjust: 100%; /* 4 */
+    -ms-text-size-adjust: 100%; /* 4 */
+}
+
+/* Render the `main` element consistently in IE. */
+main { display: block; }
+
+/* Remove the grey background on active links in IE 10. */
+a { background-color: transparent; }
+
+/**
+ * 1. Correct inheritance and scaling of font size in all browsers.
+ * 2. Correct `em` font-sizing in all browsers.
+ */
+
+code,
+kbd,
+samp,
+pre {
+    font-family: monospace; /* 1. */
+    font-size: 1em; /* 2. */
+}
+
+/* Remove the border on images inside links in IE 10. */
+img { border-style: none; }
+
+/* Correct line-height in all browsers. */
+button,
+input,
+optgroup,
+select,
+textarea { line-height: 1.15; }
+
+/* Remove the inheritance of text-transform in Edge, Firefox and IE. */
+button,
+select { text-transform: none; }
+
+/* Correct inability to style clickable types in iOS, Safari, and Firefox. */
+button,
+button[type="button"],
+button[type="reset"],
+input[type="submit"] {
+    -moz-appearance: button;
+    -webkit-appearance: button;
+}
+
+/* Remove default vertical scrollbar in IE 10+. */
+textarea {
+    overflow: auto;
+}
