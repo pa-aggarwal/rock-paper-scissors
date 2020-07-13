@@ -1,5 +1,5 @@
 /**
- * Generate random string representing computer's play.
+ * Generate random string representing the computer's play.
  * @return {String} - One of ["Rock", "Paper", "Scissors"].
  */
 function computerPlay() {
@@ -9,39 +9,30 @@ function computerPlay() {
 }
 
 /**
- * Return a message telling the player if they won the current round.
+ * Return the name of the player who won the current round.
  * @param  {String} player   - One of ["rock", "paper", "scissors"]
  * @param  {String} computer - One of ["rock", "paper", "scissors"]
- * @return {String}          - Message describing who won.
+ * @return {String}          - Name of winning player.
  */
 function findWinner(player, computer) {
-    const computerScissors = (computer === 'scissors');
-    const computerRock = (computer === 'rock');
-    let matchResult;
-    let playerResult;
+    let playerWins;
 
     if (player === 'rock') {
-        matchResult = (computerScissors) ?    // Computer is scissors/paper.
-                'Rock beats Scissors' : 'Paper beats Rock';
-        playerResult = (computerScissors) ? 'Win' : 'Lose';
+        playerWins = (computer === 'scissors');
     } else if (player === 'paper') {
-        matchResult = (computerScissors) ?    // Computer is scissors/rock.
-                'Scissors beats Paper' : 'Paper beats Rock';
-        playerResult = (computerScissors) ? 'Lose' : 'Win';
+        playerWins = (computer !== 'scissors');
     } else {
-        matchResult = (computerRock) ?        // Computer is rock/paper.
-                'Rock beats Scissors' : 'Scissors beats Paper';
-        playerResult = (computerRock) ? 'Lose' : 'Win';
+        playerWins = (computer !== 'rock');
     }
 
-    return `The player ${ playerResult }s! ${ matchResult }`;
+    return (playerWins) ? 'Player' : 'Computer';
 }
 
 /**
  * Play a single round of rock-paper-scissors.
  * @param  {String} playerSelection   - One of ["rock", "paper", "scissors"]
  * @param  {String} computerSelection - One of ["rock", "paper", "scissors"]
- * @return {String}                   - Results of the current round.
+ * @return {String}                   - Winner of current round or draw.
  */
 function playRound(playerSelection, computerSelection) {
     // Player selections are case insensitive.
@@ -53,31 +44,35 @@ function playRound(playerSelection, computerSelection) {
 }
 
 /**
- * Play rock-paper-scissors game for 5 rounds between player and computer.
+ * Play rock-paper-scissors game until either the player/computer reaches the
+ * required score to win.
  */
 function playGame() {
-     let playerWins = 0;
-     let computerWins = 0;
+     let playerScore = 0;
+     let computerScore = 0;
      let gameWinner;
 
-     // Play the game for 5 rounds.
-     for (let i = 0; i < 5; i++) {
-         let playerSelection = prompt(`Play "rock", "paper", or "scissors"`);
-         let roundResult = playRound(playerSelection, computerPlay());
+     // Play the game until one player reaches 5 points
+     while (playerScore < 5 && computerScore < 5) {
+         let playerSelection = prompt(`Play "Rock", "Paper", or "Scissors"`);
+         let computerSelection = computerPlay();
+         let roundResult = playRound(playerSelection, computerSelection);
          console.log(roundResult);
          // Increment respective player counters based on round winner.
-         if (roundResult.indexOf('Tie') >= 0) {
+         if (roundResult === 'Draw!') {
              continue;
-         } else if (roundResult.indexOf('Win') >= 0) {
-             playerWins++;
+         } else if (roundResult === 'Player') {
+             console.log(`${ playerSelection } beats ${ computerSelection }`);
+             playerScore++;
          } else {
-             computerWins++;
+             console.log(`${ computerSelection } beats ${ playerSelection }`);
+             computerScore++;
          }
      }
 
-     if (playerWins === computerWins) {
+     if (playerScore === computerScore) {
          gameWinner = 'Nobody won. Tie game!';
-     } else if (playerWins > computerWins) {
+     } else if (playerScore > computerScore) {
          gameWinner = 'PLAYER WINS!';
      } else {
          gameWinner = 'COMPUTER WINS.';
