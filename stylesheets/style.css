@@ -1,4 +1,5 @@
 :root {
+    /* COLOURS */
     --color-black: #000;
     --color-white: #FFF;
     --color-grey: #F3F5F7;
@@ -8,13 +9,14 @@
     --color-blue-light: #D8EBFD;
     --color-orange-medium: #FCA311;
     --color-orange-light: #FED89A;
-    --heading-secondary-size: 3rem;
     --gradient-blue:
         linear-gradient(
             115deg,
             var(--color-blue-dark) 48%,
             transparent 48%
         );
+    --heading-secondary-size: 3rem;
+    /* PLAYER ACTION BUTTONS */
     --btn-bottom-space: 3rem;
     --btn-padding-left: 2.5rem;
     --btn-bg-info: top 50% right 1rem no-repeat var(--color-blue-light);
@@ -29,17 +31,21 @@ body {
     padding: 2rem 4rem;
 }
 
+/* HEADINGS */
+
 h1,
 h2,
 h3 { text-transform: uppercase; }
 
 h1 {
     color: var(--color-white);
-    font-family: 'Gentium Basic', serif;
+    font-family: 'Zilla Slab', serif;
     font-size: 4rem;
-    font-weight: 700;
+    font-weight: 500;
+    letter-spacing: .2rem;
     margin-bottom: 3rem;
     text-align: center;
+    word-spacing: .3rem;
 }
 
 h2 {
@@ -47,6 +53,8 @@ h2 {
     font-weight: 400;
     text-align: center;
 }
+
+/* MAIN PAGE CONTENT */
 
 .main-container {
     display: flex;
@@ -78,6 +86,8 @@ h2 {
     width: 28%;
 }
 
+/* BUTTONS */
+
 .buttons-container {
     display: grid;
     /* Use [name] to reference respective row line numbers. */
@@ -99,6 +109,7 @@ h2 {
     grid-column: 1 / 2;
     text-align: left;
     text-transform: uppercase;
+    transition: all .2s;
 }
 
 .action-button--1 {
@@ -129,6 +140,20 @@ h2 {
     padding-left: calc(var(--btn-padding-left) - .25rem);
 }
 
+.action-button:hover {
+    box-shadow: .75rem .75rem 3rem rgba(0, 0, 0, .3);
+    transform: translateY(-.5rem);
+}
+
+.action-button:focus { outline: none; }
+
+.action-button:active {
+    box-shadow: .55rem .55rem 3rem rgba(0, 0, 0, .2);
+    transform: translateY(-.2rem);
+}
+
+/* CURRENT ROUND RESULTS */
+
 .results-box {
     border: .3rem solid var(--color-orange-medium);
     font-size: 2rem;
@@ -141,8 +166,10 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 4rem;
+    padding-top: 3rem;
 }
+
+/* PLAYER SELECTIONS FROM CURRENT ROUND */
 
 .results-content [class$="container"] {
     align-items: center;
@@ -164,6 +191,9 @@ h2 {
     width: 15rem;
 }
 
+
+/* PLAYER SCORE COUNTS */
+
 .score-container {
     background-color: var(--color-orange-medium);
     justify-content: space-between;
@@ -180,5 +210,7 @@ h2 {
 .score {
     background-color: var(--color-orange-light);
     display: inline-block;
+    font-family: monospace;
+    font-size: 3rem;
     padding: 1rem 3rem;
 }
