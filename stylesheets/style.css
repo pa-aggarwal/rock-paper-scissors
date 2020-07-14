@@ -9,6 +9,8 @@
     --color-blue-light: #D8EBFD;
     --color-orange-medium: #FCA311;
     --color-orange-light: #FED89A;
+    --color-green-medium: #11D07D;
+    --color-green-light: #B4F8DC;
     --gradient-blue:
         linear-gradient(
             115deg,
@@ -171,7 +173,8 @@ h2 {
 
 /* PLAYER SELECTIONS FROM CURRENT ROUND */
 
-.results-content [class$="container"] {
+.actions-container,
+.score-container {
     align-items: center;
     display: flex;
 }
@@ -239,4 +242,24 @@ h2 {
     font-family: monospace;
     font-size: 3rem;
     padding: 1rem 3rem;
+}
+
+.winner::before {
+    content: "🏆";
+    display: inline-block;
+    padding-right: 1rem;
+}
+
+.winner::after {
+    content: "🏆";
+    display: inline-block;
+    padding-left: 1rem;
+}
+
+.green-bg {
+    background-color: var(--color-green-medium);
+}
+
+.green-light-bg {
+    background-color: var(--color-green-light);
 }
