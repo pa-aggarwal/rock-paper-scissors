@@ -191,6 +191,32 @@ h2 {
     width: 15rem;
 }
 
+.rock-play {
+    background:
+        url("../images/rock.png")
+        center
+        no-repeat
+        var(--color-blue-light);
+    background-size: 70%;
+}
+
+.paper-play {
+    background:
+        url("../images/paper.png")
+        center
+        no-repeat
+        var(--color-blue-light);
+    background-size: 70%;
+}
+
+.scissors-play {
+    background:
+        url("../images/scissors.png")
+        center
+        no-repeat
+        var(--color-blue-light);
+    background-size: 70%;
+}
 
 /* PLAYER SCORE COUNTS */
 

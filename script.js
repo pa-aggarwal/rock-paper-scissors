@@ -8,6 +8,20 @@ function computerPlay() {
     return gameActionsArr[randInt];  // Returns random action.
 }
 
+function updateActionImage(classList, newSelection) {
+    // Classes from style.css stylesheet.
+    const actionClasses = ['rock-play', 'paper-play', 'scissors-play'];
+    // Remove previous action class from classList.
+    for (let i = 0; i < actionClasses.length; i++) {
+        if (classList.contains(actionClasses[i])) {
+            classList.remove(actionClasses[i]);
+            break;
+        }
+    }
+    // Add new action class.
+    classList.add(newSelection + '-play');
+}
+
 /**
  * Return the name of the player who won the current round.
  * @param  {String} player   - One of ["rock", "paper", "scissors"]
@@ -25,22 +39,32 @@ function findWinner(player, computer) {
         playerWins = (computer !== 'rock');
     }
 
-    return (playerWins) ? 'Player' : 'Computer';
+    return (playerWins) ? 'player' : 'computer';
 }
 
 /**
  * Play a single round of rock-paper-scissors.
- * @param  {String} playerSelection   - One of ["rock", "paper", "scissors"]
- * @param  {String} computerSelection - One of ["rock", "paper", "scissors"]
- * @return {String}                   - Winner of current round or draw.
  */
-function playRound(playerSelection, computerSelection) {
-    // Player selections are case insensitive.
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
+function playRound() {
+    // 'this' refers to button element calling this function.
+    const playerSelection = this.textContent.toLowerCase();
+    const computerSelection = computerPlay().toLowerCase();
+    const classListPlayer = document.querySelector('.player-action').classList;
+    const classListComp = document.querySelector('.computer-action').classList;
 
-    return (playerSelection === computerSelection) ?
-            'Draw!' : findWinner(playerSelection, computerSelection);
+    updateActionImage(classListPlayer, playerSelection);
+    updateActionImage(classListComp, computerSelection);
+
+    // Tie between player and computer.
+    if (playerSelection === computerSelection) {
+        return;
+    }
+
+    // Update winner's score
+    const winner = findWinner(playerSelection, computerSelection);
+    let oldScore = +(document.querySelector(`#${ winner }-score`).textContent);
+    document.querySelector(`#${ winner }-score`).textContent =
+        (oldScore + 1).toString();
 }
 
 /**
@@ -79,4 +103,10 @@ function playGame() {
      }
 
      console.log(gameWinner);
+}
+
+const buttons = [...document.querySelectorAll('.player .action-button')];
+for (let i = 0; i < buttons.length; i++) {
+    let playerSelection = buttons[i].textContent;
+    buttons[i].addEventListener('click', playRound);
 }

@@ -14,7 +14,7 @@
     <body>
         <h1>Rock Paper Scissors</h1>
         <div class="main-container">
-            <div class="main-child player-box">
+            <div class="main-child player-box player">
                 <h2 class="player-heading">Player</h2>
                 <div class="buttons-container">
                     <button class="action-button action-button--1" type="button">Rock</button>
@@ -33,16 +33,16 @@
                     <div class="scores-box">
                         <div class="score-container">
                             <h3 class="score-heading">Player</h3>
-                            <span class="first-score score">0</span>
+                            <span id="player-score" class="score">0</span>
                         </div>
                         <div class="score-container">
                             <h3 class="score-heading">Computer</h3>
-                            <span class="second-score score">0</span>
+                            <span id="computer-score" class="score">0</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="main-child player-box">
+            <div class="main-child player-box computer">
                 <h2 class="player-heading">Computer</h2>
                 <div class="buttons-container">
                     <button class="action-button action-button--1" type="button">Rock</button>
