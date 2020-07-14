@@ -1,6 +1,14 @@
+/* GLOBAL CONSTANTS */
+
+// Player's buttons stored in array
+const BUTTONS = [...document.querySelectorAll('.player .action-button')];
+const WINNING_SCORE = 5;
+
+/* FUNCTIONS */
+
 /**
  * Generate random string representing the computer's play.
- * @return {String} - One of ["Rock", "Paper", "Scissors"].
+ * @return {String} - One of ['Rock', 'Paper', 'Scissors'].
  */
 function computerPlay() {
     const gameActionsArr = ['Rock', 'Paper', 'Scissors'];
@@ -8,6 +16,11 @@ function computerPlay() {
     return gameActionsArr[randInt];  // Returns random action.
 }
 
+/**
+ * Update an element's class list to show a player's play for the current round.
+ * @param {Object} classList    - DOMTokenList of classes applied to element.
+ * @param {String} newSelection - One of ['rock', 'paper', 'scissors'].
+ */
 function updateActionImage(classList, newSelection) {
     // Classes from style.css stylesheet.
     const actionClasses = ['rock-play', 'paper-play', 'scissors-play'];
@@ -24,8 +37,8 @@ function updateActionImage(classList, newSelection) {
 
 /**
  * Return the name of the player who won the current round.
- * @param  {String} player   - One of ["rock", "paper", "scissors"]
- * @param  {String} computer - One of ["rock", "paper", "scissors"]
+ * @param  {String} player   - One of ['rock', 'paper', 'scissors']
+ * @param  {String} computer - One of ['rock', 'paper', 'scissors']
  * @return {String}          - Name of winning player.
  */
 function findWinner(player, computer) {
@@ -43,12 +56,13 @@ function findWinner(player, computer) {
 }
 
 /**
- * Play a single round of rock-paper-scissors.
+ * Play a single round of the game, updating the round results as necessary.
  */
 function playRound() {
     // 'this' refers to button element calling this function.
     const playerSelection = this.textContent.toLowerCase();
     const computerSelection = computerPlay().toLowerCase();
+    // Element (containing each player's action) class lists
     const classListPlayer = document.querySelector('.player-action').classList;
     const classListComp = document.querySelector('.computer-action').classList;
 
@@ -66,47 +80,9 @@ function playRound() {
     document.querySelector(`#${ winner }-score`).textContent =
         (oldScore + 1).toString();
 }
-
-/**
- * Play rock-paper-scissors game until either the player/computer reaches the
- * required score to win.
- */
-function playGame() {
-     let playerScore = 0;
-     let computerScore = 0;
-     let gameWinner;
-
-     // Play the game until one player reaches 5 points
-     while (playerScore < 5 && computerScore < 5) {
-         let playerSelection = prompt(`Play "Rock", "Paper", or "Scissors"`);
-         let computerSelection = computerPlay();
-         let roundResult = playRound(playerSelection, computerSelection);
-         console.log(roundResult);
-         // Increment respective player counters based on round winner.
-         if (roundResult === 'Draw!') {
-             continue;
-         } else if (roundResult === 'Player') {
-             console.log(`${ playerSelection } beats ${ computerSelection }`);
-             playerScore++;
-         } else {
-             console.log(`${ computerSelection } beats ${ playerSelection }`);
-             computerScore++;
-         }
-     }
-
-     if (playerScore === computerScore) {
-         gameWinner = 'Nobody won. Tie game!';
-     } else if (playerScore > computerScore) {
-         gameWinner = 'PLAYER WINS!';
-     } else {
-         gameWinner = 'COMPUTER WINS.';
-     }
-
-     console.log(gameWinner);
 }
 
-const buttons = [...document.querySelectorAll('.player .action-button')];
-for (let i = 0; i < buttons.length; i++) {
-    let playerSelection = buttons[i].textContent;
-    buttons[i].addEventListener('click', playRound);
+// Add event listener to each button.
+for (let i = 0; i < BUTTONS.length; i++) {
+    BUTTONS[i].addEventListener('click', playRound);
 }
