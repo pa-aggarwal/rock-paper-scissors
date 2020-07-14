@@ -56,6 +56,35 @@ function findWinner(player, computer) {
 }
 
 /**
+ * Update the score of the player who won the current round.
+ * @param  {String} playerSelection   - One of ['rock', 'paper', 'scissors']
+ * @param  {String} computerSelection - One of ['rock', 'paper', 'scissors']
+ */
+function updateScore(playerSelection, computerSelection) {
+    const winner = findWinner(playerSelection, computerSelection);
+    // Get the winner's previous score.
+    let oldScore = +(document.querySelector(`#${ winner }-score`).textContent);
+    // Increment score by 1.
+    document.querySelector(`#${ winner }-score`).textContent =
+        (oldScore + 1).toString();
+}
+
+/**
+ * Check if a player has won the game.
+ */
+function checkGameOver() {
+    const playerScore = +(document.getElementById('player-score').textContent);
+    const compScore = +(document.getElementById('computer-score').textContent);
+
+    if (playerScore === WINNING_SCORE || compScore === WINNING_SCORE) {
+        // Stop calling playRound() upon button clicks since game is over.
+        for (let i = 0; i < BUTTONS.length; i++) {
+            BUTTONS[i].removeEventListener('click', playRound);
+        }
+    }
+}
+
+/**
  * Play a single round of the game, updating the round results as necessary.
  */
 function playRound() {
@@ -72,14 +101,11 @@ function playRound() {
     // Tie between player and computer.
     if (playerSelection === computerSelection) {
         return;
+    } else {
+        updateScore(playerSelection, computerSelection);
     }
 
-    // Update winner's score
-    const winner = findWinner(playerSelection, computerSelection);
-    let oldScore = +(document.querySelector(`#${ winner }-score`).textContent);
-    document.querySelector(`#${ winner }-score`).textContent =
-        (oldScore + 1).toString();
-}
+    checkGameOver();
 }
 
 // Add event listener to each button.
